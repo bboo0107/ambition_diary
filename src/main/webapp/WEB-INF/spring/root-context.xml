@@ -3,9 +3,11 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
 	xmlns:util="http://www.springframework.org/schema/util"
-	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
-		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<!-- properties 사용을 위한 설정 -->
@@ -35,7 +37,7 @@
 	<!-- datasource 가져오기 / 	쿼리문이 있는 장소를 지정(mapperLocations) / 풀관련 설정 / 퓰네임 줄여주는 설정(configLocation)-->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">	
 		<property name="dataSource" ref="datasource"/>
-		<property name="mapperLocations" value="classpath:com/todo/project/dao/*.xml"/>
+		<property name="mapperLocations" value="classpath*:com/todo/project/dao/*.xml"/>
 		<property name="environment" value="classpath:/config/pool-config.xml"/>	
 		<property name="configLocation" value="classpath:/config/alias-config.xml"/>
  	</bean>
