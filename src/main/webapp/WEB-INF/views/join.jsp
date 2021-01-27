@@ -78,7 +78,7 @@
 <body>
 		<div class="col">
 			<p>야망일기 회원가입</p>
-				<form action="join" method="post">
+				<form action="join" method="post" onsubmit="return joinchk()">
 					<div class="join-contentbox">
 					    <h4>아이디</h4>
 					    <input type="text" name="user_id" id="user_id"/></br>
@@ -86,20 +86,20 @@
 					</div>
 					<div class="join-contentbox">
 					    <h4>비밀번호</h4>
-					    <input type="password" name="user_pw"/>
+					    <input type="password" name="user_pw" id="user_pw1"/>
 					</div>
 					<div class="join-contentbox">
 					    <h4>비밀번호 확인</h4>
-					    <input type="password" name="user_pw2" onchange="pwchk()"/></br>
+					    <input type="password" name="user_pw2" id="user_pw2" onchange="pwchk()"/></br>
 					    <span id="pwchk"></span>
 					</div>
 					<div class="join-contentbox">
 					    <h4>이  름</h4>
-					    <input type="text" name="user_name"/>
+					    <input type="text" name="user_name" id="user_name"/>
 					</div>
 					<div class="join-contentbox">
 					<h4>이메일</h4>
-					<input type="email" name="user_email"/>
+					<input type="email" name="user_email" id="user_email"/>
 					</div>
 					<div class="btnbox">
 			    		<button type="submit" class="btn">가  입</button>		
@@ -112,7 +112,8 @@
 	if(msg != ""){
 		alert(msg);
 		}
-	
+
+	//-----------------------------아이디 중복확인--------------------------------------------------------
 	$('#user_id').focusout(function() {
 		var id = $('#user_id').val();
 		console.log(id);
@@ -122,12 +123,11 @@
 			dataType:'JSON',
 			data:{"id":id},
 			success:function(data){
-				console.log(data.cnt)
 				if(data.cnt>0){
 					$('#idchk').html("아이디가 존재합니다. 다시 확인해주세요.");
 					$('#idchk').css("color","red");
-					$('#user_id').val() = null;
-				}else if(user_id==""){
+					$('#user_id').val(' ');
+				}else if(id==""){
 					$('#idchk').html("아이디를 입력해주세요.");
 					$('#idchk').css("font-size","13px");
 					$('#idchk').css("color","red");
@@ -142,5 +142,39 @@
 			}
 		});
 	});
+	
+	//--------------------------------비밀번호 중복확인-----------------------------------------------------
+	function pwchk(){
+		var pw1 = $('#user_pw1').val();
+		var pw2 = $('#user_pw2').val();
+		console.log(pw1+"/"+pw2);
+		if(pw1!=pw2){
+			$('#pwchk').html("비밀번호가 일치하지않습니다. 다시 확인해주세요.");
+			$('#pwchk').css("font-size","13px");
+			$('#pwchk').css("color","red");
+			console.log("일치하지않음");
+		}else{
+			$('#pwchk').html("비밀번호가 일치합니다.");
+			$('#pwchk').css("font-size","13px");
+			$('#pwchk').css("color","blue");
+		}		
+	}
+	
+	//------------------------------빈칸확인-------------------------------------------------------------
+	function joinchk(){
+		if($('#user_id').val()!=""){
+			if(($('#user_pw1').val()!="")&&($('#user_pw2').val()!="")&&($('#user_pw1').val()==$('#user_pw2').val())){
+						if($('#user_name').val()!=""){
+							if($('#user_email').val()!=""){
+								return true;
+							}
+						}
+					}
+				}
+				console.log("놉");
+				alert("누락된 곳이나 틀린곳이 없는지 확인해주세요.");
+				return false;
+			}
+	
 </script>
 </html>
