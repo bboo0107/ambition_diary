@@ -171,7 +171,6 @@
 						}
 					}
 				}
-				console.log("놉");
 				alert("누락된 곳이나 틀린곳이 없는지 확인해주세요.");
 				return false;
 			}

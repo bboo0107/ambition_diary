@@ -151,6 +151,44 @@
 		height: 130px;
 		position: relative;
 		}
+
+	/*팝업 모달*/
+	.modal_wrap{
+	        display: none;
+	        width: 500px;
+	        height: 400px;
+	        position: absolute;
+	        top:50%;
+	        left: 50%;
+	        margin: -250px 0 0 -250px;
+	        background:#eee;
+	        z-index: 2;
+	    }
+	    .black_bg{
+	        display: none;
+	        position: absolute;
+	        content: "";
+	        width: 100%;
+	        height: 100%;
+	        background-color:rgba(0, 0,0, 0.5);
+	        top:0;
+	        left: 0;
+	        z-index: 1;
+	    }
+	    .modal_close{
+	        width: 26px;
+	        height: 26px;
+	        position: absolute;
+	        top: -30px;
+	        right: 0;
+	    }
+	    .modal_close> a{
+	        display: block;
+	        width: 100%;
+	        height: 100%;
+	        background:url(https://img.icons8.com/metro/26/000000/close-window.png);
+	        text-indent: -9999px;
+	    }
 	</style>
 </head>
 <body>	
@@ -165,6 +203,7 @@
 			</div>
 		</header>
 	</div>
+
 	<div>	
 		<div class="sidenav">
 			<a href="#">나의 일년 계획</a>
@@ -189,8 +228,33 @@
 			</div>
 		</div>
 	</div>	
+<!--  -->	
+<div class="black_bg"></div>
+<div class="modal_wrap">
+    <div class="modal_close"><a href="#">close</a></div>
+    <div>
+       <div id="idform">
+		<form class="modal-content animate" action="login" method="post">
+		    <div class="imgcontainer">
+		      <span onclick="document.getElementById('idform').style.display='none'" class="close" title="Close Modal">&times;</span>      
+		    </div>
+		
+		    <div class="container">
+		      <label for="uname"><b>아이디</b></label>
+		      <input type="text" placeholder="아이디를 입력해주세요." name="user_id">
+		
+		      <label for="psw"><b>비밀번호</b></label>
+		      <input type="password" placeholder="비밀번호를 입력해주세요." name="user_pw">
+		        
+		      <button type="submit">로그인</button>
+		    </div>
+		</form>
+	</div>
+    </div>
+</div>
+<!--  -->
 	<script>
-		/* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+		/*드롭다운 메뉴*/
 		var dropdown = document.getElementsByClassName("dropdown-btn");
 		var i;
 		
@@ -205,6 +269,25 @@
 		  }
 		  });
 		}
+		
+		/*로그인 팝업 */
+		window.onload = function() {
+
+	    function onClick() {
+	        document.querySelector('.modal_wrap').style.display ='block';
+	        document.querySelector('.black_bg').style.display ='block';
+	    }   
+	    function offClick() {
+	        document.querySelector('.modal_wrap').style.display ='none';
+	        document.querySelector('.black_bg').style.display ='none';
+	    }
+	 
+	    document.getElementById('login-btn').addEventListener('click', onClick);
+	    document.querySelector('.modal_close').addEventListener('click', offClick);
+	 
+	};
+
+
 </script>
 </body>
 
