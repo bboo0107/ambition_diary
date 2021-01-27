@@ -234,11 +234,7 @@
     <div class="modal_close"><a href="#">close</a></div>
     <div>
        <div id="idform">
-		<form class="modal-content animate" action="login" method="post">
-		    <div class="imgcontainer">
-		      <span onclick="document.getElementById('idform').style.display='none'" class="close" title="Close Modal">&times;</span>      
-		    </div>
-		
+		<form class="modal-content animate" action="login" method="post">		
 		    <div class="container">
 		      <label for="uname"><b>아이디</b></label>
 		      <input type="text" placeholder="아이디를 입력해주세요." name="user_id">
