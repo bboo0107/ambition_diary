@@ -11,4 +11,7 @@
 	<select id="dbchk" resultType="Integer">
 		SELECT COUNT(id) FROM MEMBER WHERE id=#{param1}
 	</select>
+	<select id="login" resultType="Integer">
+		SELECT COUNT(id) FROM MEMBER WHERE id=#{param1} AND pw=#{param2}
+	</select>
 </mapper>

@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.todo.project.service.MemberService;
 
@@ -47,5 +50,16 @@ public class HomeController {
 	public@ResponseBody HashMap<String, Object> dbchk(@RequestParam String id) {
 		return service.dbchk(id);
 	}
-	
+	//------------------------------로그인---------------------------------------------------------------
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public ModelAndView login(@RequestParam String id, @RequestParam String pw, HttpSession session, RedirectAttributes rAttr) {
+		return service.login(id,pw,session,rAttr);
+	}
+	//----------------------------로그아웃----------------------------------------------------------------
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout(HttpSession session, Model model) {
+		session.removeAttribute("loginid");
+		model.addAttribute("msg","로그아웃 되었습니다.");
+		return "Main";
+	}
 }

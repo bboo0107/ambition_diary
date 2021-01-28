@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,7 +37,7 @@
 			/* border: 1px solid red; */
 			position: relative;
     		top: 50px;
-		}
+		}		
 		#header_wrapper header #userbox #login-btn{
 			width: 60px;
 			height: 30px;
@@ -156,13 +158,14 @@
 	.modal_wrap{
 	        display: none;
 	        width: 500px;
-	        height: 400px;
+	        height: 250px;
 	        position: absolute;
 	        top:50%;
 	        left: 50%;
 	        margin: -250px 0 0 -250px;
 	        background:#eee;
 	        z-index: 2;
+	        border-radius: 7px;
 	    }
 	    .black_bg{
 	        display: none;
@@ -189,36 +192,118 @@
 	        background:url(https://img.icons8.com/metro/26/000000/close-window.png);
 	        text-indent: -9999px;
 	    }
+	    .modal_wrap button{
+			border: 1px solid #ff7867;
+			color: gray;
+			background-color: white;
+			font-size: 17px;
+		    border-radius: 7px;
+		    cursor: pointer;
+		    margin-top: 30px;
+		    width: 390px;
+		    height: 40px;
+	    }
+	    .modal_wrap button:hover {
+  	       opacity: 0.8;
+	       background-color:#ff7867;
+	       color: white; 
+		        }
+		.modal_wrap .container{
+			position: absolute;
+			top: 18%;
+			margin-left: 50px;
+			width: 500px;
+			height: 200px;
+		}        
+	    .modal_wrap .container span{
+	    	display: inline-block;
+	    	width: 75px;
+	    	height: 20px;
+	    }
+	    .modal_wrap .container input{
+	    	display: inline-block;
+		    width: 300px;
+		    height: 40px;
+		    margin-top: 7px;
+		    font-size: 15px;
+		    border: 0;
+		    border-bottom:1px solid lightgray;
+		    border-radius: 7px;
+		    
+	    }
+	    .modal_wrap .container input:focus{
+		    border-bottom:1px solid #ff7867;
+		    outline: none;
+		}
+	    
+	    
 	</style>
+	<script src = "https://code.jquery.com/jquery-3.5.1.min.js"> </script>
 </head>
 <body>	
-	<div id="header_wrapper">
-		<header>
-			<a href = "">
-				<img src="resources/img/logo.png" alt=" ">
-			</a>
-			<div id="userbox">
-				<button id="login-btn">로그인</button>
-				<button id="join-btn" onclick="location.href='joinForm'">회원가입</button>
+	 <c:choose>
+	    <c:when test="${sessionScope.loginid eq  null}"> --%>
+			<div id="header_wrapper">
+				<header>
+					<a href = "#">
+						<img src="resources/img/logo.png" alt=" ">
+					</a>
+					<div id="userbox">
+						<button id="login-btn">로그인</button>
+						<button id="join-btn" onclick="location.href='joinForm'">회원가입</button>
+					</div>
+				</header>
 			</div>
-		</header>
-	</div>
+ 		</c:when>
+ 		
+		<c:otherwise>
+			<div id="header_wrapper">
+				<header>
+					<a href = "#">
+						<img src="resources/img/logo.png" alt=" ">
+					</a>
+				</header>
+			</div>
+		</c:otherwise>
+	</c:choose> 
 
 	<div>	
-		<div class="sidenav">
-			<a href="#">나의 일년 계획</a>
-			<button class="dropdown-btn">나의 분기별 계획
-		    	<i class="fa fa-caret-down"></i>
-			</button>
-			<div class="dropdown-container">
-			    <a href="#">1분기</a>
-			    <a href="#">2분기</a>
-			    <a href="#">3분기</a>
-			    <a href="#">4분기</a>
-			  </div>
-			<a href="#">나의 야망</a>
-			<a href="#">2021년 총 평가</a>
-		</div>
+		<c:choose>
+			<c:when test="${sessionScope.loginid eq  null}">
+				<div class="sidenav">
+					<a href="#">나의 일년 계획</a>
+					<button class="dropdown-btn">나의 분기별 계획
+				    	<i class="fa fa-caret-down"></i>
+					</button>
+					<div class="dropdown-container">
+					    <a href="#">1분기</a>
+					    <a href="#">2분기</a>
+					    <a href="#">3분기</a>
+					    <a href="#">4분기</a>
+					  </div>
+					<a href="#">나의 야망</a>
+					<a href="#">2021년 총 평가</a>
+				</div>
+			</c:when>
+			<c:otherwise>
+				<div class="sidenav">
+					${sessionScope.loginid}의 야망일기
+					<a href="#">나의 일년 계획</a>
+					<button class="dropdown-btn">나의 분기별 계획
+				    	<i class="fa fa-caret-down"></i>
+					</button>
+					<div class="dropdown-container">
+					    <a href="#">1분기</a>
+					    <a href="#">2분기</a>
+					    <a href="#">3분기</a>
+					    <a href="#">4분기</a>
+					  </div>
+					<a href="#">나의 야망</a>
+					<a href="#">2021년 총 평가</a>
+				<button onclick="location.href='logout'">로그아웃</button>
+				</div>
+			</c:otherwise>				
+		</c:choose>				
 		<div class="content">
 			<div class="longplan">
 			</div>
@@ -232,24 +317,29 @@
 <div class="black_bg"></div>
 <div class="modal_wrap">
     <div class="modal_close"><a href="#">close</a></div>
-    <div>
        <div id="idform">
-		<form class="modal-content animate" action="login" method="post">		
+		<form class="modal-content" action="login" method="post">		
 		    <div class="container">
-		      <label for="uname"><b>아이디</b></label>
-		      <input type="text" placeholder="아이디를 입력해주세요." name="user_id">
-		
-		      <label for="psw"><b>비밀번호</b></label>
-		      <input type="password" placeholder="비밀번호를 입력해주세요." name="user_pw">
-		        
+		      <div id="login_id">
+			      <span><b>아이디</b></span>
+			      <input type="text" name="id">
+			  </div>
+		      <div id="login_pw">
+			      <span><b>비밀번호</b></span>
+			      <input type="password" name="pw">
+		      </div> 		      
 		      <button type="submit">로그인</button>
 		    </div>
 		</form>
 	</div>
-    </div>
 </div>
 <!--  -->
 	<script>
+	var msg = "${msg}";
+	if(msg != ""){
+		alert(msg);
+		}
+	
 		/*드롭다운 메뉴*/
 		var dropdown = document.getElementsByClassName("dropdown-btn");
 		var i;
@@ -269,7 +359,7 @@
 		/*로그인 팝업 */
 		window.onload = function() {
 
-	    function onClick() {
+	     function onClick() {
 	        document.querySelector('.modal_wrap').style.display ='block';
 	        document.querySelector('.black_bg').style.display ='block';
 	    }   
@@ -279,7 +369,16 @@
 	    }
 	 
 	    document.getElementById('login-btn').addEventListener('click', onClick);
-	    document.querySelector('.modal_close').addEventListener('click', offClick);
+	    document.querySelector('.modal_close').addEventListener('click', offClick); 
+	    
+	   /*  $('#login-btn').on('click',function(){
+	    	$('.modal_wrap').css('display','block');
+	    	$('.black_bg').css('display','block');
+	    });
+	    $('.modal_close').off('click',function(){
+	    	$('.modal_wrap').css('display','none');
+	    	$('.black_bg').css('display','none');
+	    }); */
 	 
 	};
 

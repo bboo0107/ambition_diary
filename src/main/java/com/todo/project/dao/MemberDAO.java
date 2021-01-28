@@ -8,5 +8,7 @@ public interface MemberDAO {
 
 	int dbchk(String id);//아이디 중복확인
 
+	int login(String id, String pw);//로그인
+
 
 }
