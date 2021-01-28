@@ -160,9 +160,9 @@
 		    border: 1px solid gray;
 		    color: gray;
 		    border-radius: 7px;
-		    position: relative;
+		    position: fixed;
 		    left: 15px;
-		    top: 485px;
+		    top: 870px;
 		    cursor: pointer;
 		}
 		.sidenav #logout-btn:hover{
@@ -287,35 +287,39 @@
 		<c:choose>
 			<c:when test="${sessionScope.loginid eq  null}">
 				<div class="sidenav">
-					<a href="#">나의 일년 계획</a>
-					<button class="dropdown-btn">나의 분기별 계획
-				    	<i class="fa fa-caret-down"></i>
-					</button>
-					<div class="dropdown-container">
-					    <a href="#">1분기</a>
-					    <a href="#">2분기</a>
-					    <a href="#">3분기</a>
-					    <a href="#">4분기</a>
-					  </div>
-					<a href="#">나의 야망</a>
-					<a href="#">2021년 총 평가</a>
+					<div>
+						<a href="#">나의 일년 계획</a>
+						<button class="dropdown-btn">나의 분기별 계획
+					    	<i class="fa fa-caret-down"></i>
+						</button>
+						<div class="dropdown-container">
+						    <a href="#">1분기</a>
+						    <a href="#">2분기</a>
+						    <a href="#">3분기</a>
+						    <a href="#">4분기</a>
+						  </div>
+						<a href="#">나의 야망</a>
+						<a href="#">2021년 총 평가</a>
+					</div>
 				</div>
 			</c:when>
 			<c:otherwise>
 				<div class="sidenav">
 					${sessionScope.loginid}의 야망일기
-					<a href="#">나의 일년 계획</a>
-					<button class="dropdown-btn">나의 분기별 계획
-				    	<i class="fa fa-caret-down"></i>
-					</button>
-					<div class="dropdown-container">
-					    <a href="#">1분기</a>
-					    <a href="#">2분기</a>
-					    <a href="#">3분기</a>
-					    <a href="#">4분기</a>
-					  </div>
-					<a href="#">나의 야망</a>
-					<a href="#">2021년 총 평가</a>
+					<div>
+						<a href="#">나의 일년 계획</a>
+						<button class="dropdown-btn">나의 분기별 계획
+					    	<i class="fa fa-caret-down"></i>
+						</button>
+						<div class="dropdown-container">
+						    <a href="#">1분기</a>
+						    <a href="#">2분기</a>
+						    <a href="#">3분기</a>
+						    <a href="#">4분기</a>
+						  </div>
+						<a href="#">나의 야망</a>
+						<a href="#">2021년 총 평가</a>
+					</div>
 				<button id="logout-btn" onclick="location.href='logout'">로그아웃</button>
 				</div>
 			</c:otherwise>				
