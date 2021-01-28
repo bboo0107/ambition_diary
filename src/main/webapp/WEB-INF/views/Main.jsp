@@ -153,6 +153,22 @@
 		height: 130px;
 		position: relative;
 		}
+		.sidenav #logout-btn{
+			width: 170px;
+		    height: 35px;
+		    background-color: transparent;
+		    border: 1px solid gray;
+		    color: gray;
+		    border-radius: 7px;
+		    position: relative;
+		    left: 15px;
+		    top: 485px;
+		    cursor: pointer;
+		}
+		.sidenav #logout-btn:hover{
+			border: 1px solid #ff7867;
+			color: #ff7867;
+		}
 
 	/*팝업 모달*/
 	.modal_wrap{
@@ -300,7 +316,7 @@
 					  </div>
 					<a href="#">나의 야망</a>
 					<a href="#">2021년 총 평가</a>
-				<button onclick="location.href='logout'">로그아웃</button>
+				<button id="logout-btn" onclick="location.href='logout'">로그아웃</button>
 				</div>
 			</c:otherwise>				
 		</c:choose>				
