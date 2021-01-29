@@ -62,4 +62,11 @@ public class HomeController {
 		model.addAttribute("msg","로그아웃 되었습니다.");
 		return "Main";
 	}
+	@RequestMapping(value = "/quarter", method = RequestMethod.GET)
+	public ModelAndView quarter(Model model, @RequestParam String type) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("type",type);
+		mav.setViewName("quarter");
+		return mav;
+	}
 }
