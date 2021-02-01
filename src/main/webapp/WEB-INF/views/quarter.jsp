@@ -19,6 +19,21 @@
 		width: 100%;
 		height: 80%;
 		border: 1px solid green;
+		display: grid; 
+		padding-top:16px;
+		padding-bottom:4px;
+		grid-template-columns: repeat(4, 1fr);
+		grid-template-rows: repeat(3, minmax(280px, auto));
+		grid-template-columns: repeat(auto-fill, minmax(25%, auto));
+		gap: 20px;
+		align-items: stretch;
+		justify-items: stretch;
+	}
+	..planlistwrap{
+		width: 280px;
+		height: 335px;
+		border: 1px solid black;
+		margin: 50px 50px 30px 50px;
 	}
 	.planlist{
 		width: 280px;
@@ -52,6 +67,11 @@
 	.checkbox_content{
 		margin: 0px 5px 0px 5px;
 		text-align: center;
+		padding: 0;
+		
+	}
+	.content_chk{
+		list-style: none;
 	}
 	.checkbox_content input{
 		width: 200px;
@@ -71,49 +91,34 @@
 		<div class="content">
 			<div class="content-allplan">
 			<form action="quarter_plan" method="post">
-				<div class="planlist">
-					<input type="hidden" name ="type" value="${type}">
-					<input type="hidden" name ="idx" value="${idx}">
+			<div class="planlist_wrap">
+				<section class="planlist">
 					<div id="checkbox_title"><input type="text" class="checkbox_title"/></div>
-					<div class="checkbox_content">
-						<div id="checkbox"></div>
-						<span><input type="text"/></span>
-					</div>
-					<div class="checkbox_content">
-						<div id="checkbox"></div>
-						<span><input type="text"/></span>
-					</div>
-					<div class="checkbox_content">
-						<div id="checkbox"></div>
-						<span><input type="text"/></span>
-					</div>
-					<div class="checkbox_content">
-						<div id="checkbox"></div>
-						<span><input type="text"/></span>
-					</div>
-					<div class="checkbox_content">
-						<div id="checkbox"></div>
-						<span><input type="text"/></span>
-					</div>
-					<div class="checkbox_content">
-						<div id="checkbox"></div>
-						<span><input type="text"/></span>
-					</div>
-					<div class="checkbox_content">
-						<div id="checkbox"></div>
-						<span><input type="text"/></span>
-					</div>
-					<div class="checkbox_content">
-						<div id="checkbox"></div>
-						<span><input type="text"/></span>
-					</div>
-				</div>
-			</form>
+					<ul class="checkbox_content">
+						<li class = "content_chk" id="content_chk">
+							<div>
+								<div id="checkbox"></div>
+								<span><input type="text" id="todo"/></span>
+							</div>
+						</li>
+					</ul>
+				</section>
 			</div>	
-		</div>	
+			</form>
+			</div>
+			</div>	
 	</c:if>
 </body>
 <script>
+	var maxAppend=1;
+	$("#todo").keydown(function(key){
+		if(key.keyCode == 13){
+			if (maxAppend >= 8) return;
+			$(".checkbox_content").append("<li class = 'content_chk' id='content_chk'><div><div id='checkbox'></div><span><input type='text' id='todo'/></span></div></li>");
+			maxAppend++;
+		}
+	});
 	
+
 </script>
 </html>
